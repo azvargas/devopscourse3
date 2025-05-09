@@ -1,8 +1,12 @@
-from click.testing import CliRunner
-from hello import hello
+from hello import toyou, add, substract
 
-def test_hello():
-    runner = CliRunner()
-    result = runner.invoke(hello, ["--name", "Thor",
-        "--color", "blue"])
-    assert "Thor" in result.output
+def setup_function(function):
+    print("Running Setup: %s" % function.__name__)
+    function.x = 10
+
+def teardown_function(function):
+    print("Running Teardown: %s" % function.__name__)
+    del function.x
+
+def test_hello_substract():
+    assert substract(test_hello_substract.x) == 9
